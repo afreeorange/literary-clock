@@ -1,6 +1,6 @@
 #!/bin/bash
 
-S3_PREFIX="public.nikhil.io/quotes"
+S3_PREFIX="public.nikhil.io/clock"
 S3_PREFIX_ESCAPED=$(echo $S3_PREFIX | sed 's/\//\\\//g')
 
 cd sources
