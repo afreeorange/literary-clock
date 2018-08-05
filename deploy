@@ -27,4 +27,4 @@ aws s3 sync . "s3://"$S3_PREFIX/ \
     --content-encoding gzip
 
 cd ..
-#rm -rf tmp
+rm -rf tmp
