@@ -46,6 +46,22 @@ function getRandomElement(list) {
     return list[Math.floor(Math.random() * list.length)];
 }
 
+// https://github.com/kellym/smartquotes.js
+function smarten(str) {
+    return str
+    .replace(/'''/g, '\u2034')                                                   // triple prime
+    .replace(/(\W|^)"(\S)/g, '$1\u201c$2')                                       // beginning "
+    .replace(/(\u201c[^"]*)"([^"]*$|[^\u201c"]*\u201c)/g, '$1\u201d$2')          // ending "
+    .replace(/([^0-9])"/g,'$1\u201d')                                            // remaining " at end of word
+    .replace(/''/g, '\u2033')                                                    // double prime
+    .replace(/(\W|^)'(\S)/g, '$1\u2018$2')                                       // beginning '
+    .replace(/([a-z])'([a-z])/ig, '$1\u2019$2')                                  // conjunction's possession
+    .replace(/((\u2018[^']*)|[a-z])'([^0-9]|$)/ig, '$1\u2019$3')                 // ending '
+    .replace(/(\u2018)([0-9]{2}[^\u2019]*)(\u2018([^0-9]|$)|$|\u2019[a-z])/ig, '\u2019$2$3')     // abbrev. years like '93
+    .replace(/(\B|^)\u2018(?=([^\u2019]*\u2019\b)*([^\u2019\u2018]*\W[\u2019\u2018]\b|[^\u2019\u2018]*$))/ig, '$1\u2019') // backwards apostrophe
+    .replace(/'/g, '\u2032');
+};
+
 function getQuote(quotesMap) {
     const date = new Date();
     const nearestQuotes = getNearestQuotes(quotesMap, date);
@@ -65,12 +81,12 @@ function setContent(quote) {
         quote.nearestHour,
         quote.nearestMinute,
     );
-    document.getElementById('quote').innerHTML = quote.quote.replace(
+    document.getElementById('quote').innerHTML = smarten(quote.quote).replace(
         quote.timeFragment,
         '<strong>' + quote.timeFragment + '</strong>',
     );
-    document.getElementById('book').innerHTML = quote.book;
-    document.getElementById('author').innerHTML = quote.author;
+    document.getElementById('book').innerHTML = smarten(quote.book);
+    document.getElementById('author').innerHTML = smarten(quote.author);
 }
 
 function sleepFor(milliseconds) {
