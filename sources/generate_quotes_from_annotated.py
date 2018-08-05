@@ -1,18 +1,20 @@
 import json
-import csv
 from collections import defaultdict
 
 quotes = defaultdict(list)
+counter = 0
 
 with open('litclock_annotated.csv') as csv_file:
-    reader = csv.reader(csv_file, delimiter='|')
-
-    for row in reader:
-        quotes[row[0]].append({
-            'timeFragment': row[1],
-            'quote': row[2],
-            'book': row[3],
-            'author': row[4],
+    for line in csv_file:
+        quote = line.strip().split('|')
+        quotes[quote[0]].append({
+            'timeFragment': quote[1],
+            'quote': quote[2],
+            'book': quote[3],
+            'author': quote[4],
         })
+        counter += 1
 
 print(json.dumps(quotes, indent=4))
+
+# print(counter)
