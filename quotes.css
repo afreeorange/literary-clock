@@ -79,7 +79,8 @@ noscript {
 }
 
 #quote {
-    font-size: 2rem;
+    font-size: 5vh;
+    /*font-size: 2rem;*/
     line-height: 1.25;
 }
 
@@ -104,7 +105,7 @@ noscript {
         margin-bottom: 1em;
     }
     #quote {
-        font-size: 1.75rem;
+        font-size: 4vh;
     }
     #source {
         margin-top: 1em;

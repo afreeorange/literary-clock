@@ -63,7 +63,7 @@ function smarten(str) {
 };
 
 function getQuote(quotesMap) {
-    const date = new Date();
+    const date = new Date('Sun Aug  5 00:00:31 CDT 2018');
     const nearestQuotes = getNearestQuotes(quotesMap, date);
 
     const theQuote = {
