@@ -1,6 +1,4 @@
-function setContent(element, content) {
-    document.getElementById(element).innerHTML = content;
-}
+let lastQuote;
 
 // Lol.
 function leftPadWithZero(timeFragment) {
@@ -28,7 +26,7 @@ function makeMapKey(hours, minutes) {
 
 function getNearestQuotes(quotesMap, dateObject) {
     // Assumption is that all hours have at least one minute with a quote
-    // and that I'll find a quote within 15 minutes in the past :/
+    // and that I'll find a quote within 15 minutes in the past.
     let possibleMatches;
 
     for (let i = 0; i <= 15; i++) {
@@ -48,39 +46,89 @@ function getRandomElement(list) {
     return list[Math.floor(Math.random() * list.length)];
 }
 
-function currentDate(quotesMap) {
+function getQuote(quotesMap) {
     const date = new Date();
-
     const nearestQuotes = getNearestQuotes(quotesMap, date);
-    const theQuote = getRandomElement(nearestQuotes.matches);
 
-    setContent('time', readableTime(nearestQuotes.nearestHour, nearestQuotes.nearestMinute));
-    setContent(
-        'quote',
-        theQuote.quote.replace(
-            theQuote.timeFragment,
-            '<strong>' + theQuote.timeFragment + '</strong>'
+    const theQuote = {
+        nearestHour: nearestQuotes.nearestHour,
+        nearestMinute: nearestQuotes.nearestMinute,
+    };
+
+    Object.assign(theQuote, getRandomElement(nearestQuotes.matches));
+
+    return theQuote;
+}
+
+function setContent(quote) {
+    document.getElementById('time').innerHTML = readableTime(
+        quote.nearestHour,
+        quote.nearestMinute,
+    );
+    document.getElementById('quote').innerHTML = quote.quote.replace(
+        quote.timeFragment,
+        '<strong>' + quote.timeFragment + '</strong>',
+    );
+    document.getElementById('book').innerHTML = quote.book;
+    document.getElementById('author').innerHTML = quote.author;
+}
+
+function sleepFor(milliseconds) {
+    return new Promise((resolve) => {
+        setTimeout(
+            resolve,
+            milliseconds,
         )
-    );
-    setContent('book', theQuote.book);
-    setContent('author', theQuote.author);
+    });
+}
 
-    console.log(theQuote.timeFragment);
+function setQuote(quotesMap) {
+    let theQuote = getQuote(quotesMap);
+    return setContent(theQuote);
 
-    setTimeout(
-        currentDate,
-        15000,
-        quotesMap
-    );
+    // // The very first time this is called
+    // if (!lastQuote) {
+    //     lastQuote = theQuote.quote;
+    //     setContent(theQuote);
+    // } else {
+
+    //     // Same quote as randomly picked the last time. No fades, do nothing.
+    //     if (theQuote.quote === lastQuote) {
+    //         setContent(theQuote);
+    //     } 
+
+    //     // Different quote for the same time. Fade in and out.
+    //     else {
+    //         lastQuote = theQuote.quote;
+    //         document.getElementById('wrapper').style.opacity = 0;
+
+    //         sleepFor(5000).then(r => {
+    //             setContent(theQuote);
+    //             document.getElementById('wrapper').style.opacity = 1;
+    //         })
+    //     }
+    // }
 }
 
 window.onload = () => {
     fetch('/quotes.json')
     .then(response => {
-        return response.text()
+        if (response.status != 200) {
+            document.getElementById('oh-crap').style.visibility = 'visible';
+        }
+        return response.text();
     })
     .then(text => {
         document.getElementById('loading').style.display = 'none';
-        currentDate(JSON.parse(text));
+        let quotesMap = JSON.parse(text);
+
+        // This is crappy. Eminently possible that the first invocation
+        // will show a quote that the random quote picker will pick :/
+        setQuote(quotesMap);
+        setInterval(
+            setQuote,
+            15000,
+            quotesMap
+        );
     });
 }

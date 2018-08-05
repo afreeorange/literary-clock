@@ -1,0 +1,18 @@
+#!/bin/bash
+
+FILES_TO_SYNC="
+clock.css
+clock.html
+clock.js
+deploy
+loading.svg
+quotes.json
+"
+
+mkdir -p tmp
+for FILE in $FILES_TO_SYNC; do
+    gzip -9 $FILE
+    mv $FILE.gz tmp/$FILE
+done
+
+# aws s3 sync tmp/ s3://public.nikhil.io/quotes/ --content-encoding gzip
