@@ -11,14 +11,15 @@ function leftPadWithZero(timeFragment) {
 }
 
 function readableTime(hours, minutes) {
-    let meridiem = 'AM';
     if (hours == 0) {
-        return '00:' + leftPadWithZero(minutes) + ' ' + meridiem;
+        return '00:' + leftPadWithZero(minutes) + ' AM';
     }
-    if (hours > 11) {
-        meridiem = 'PM';
+
+    if (hours >= 12) {
+        return (hours - 12) + ':' + leftPadWithZero(minutes) + ' PM';
     }
-    return hours + ':' + leftPadWithZero(minutes) + ' ' + meridiem;
+
+    return hours + ':' + leftPadWithZero(minutes) + ' AM';
 }
 
 function makeMapKey(hours, minutes) {
@@ -28,8 +29,10 @@ function makeMapKey(hours, minutes) {
 function getNearestQuotes(quotesMap, dateObject) {
     // Assumption is that all hours have at least one minute with a quote
     // and that I'll find a quote within 15 minutes in the past :/
-    for (var i = 0; i <= 15; i++) {
-        let possibleMatches = quotesMap[makeMapKey(dateObject.getHours(), dateObject.getMinutes() - i)]
+    let possibleMatches;
+
+    for (let i = 0; i <= 15; i++) {
+        possibleMatches = quotesMap[makeMapKey(dateObject.getHours(), dateObject.getMinutes() - i)];
 
         if (possibleMatches) {
             return {
@@ -37,11 +40,8 @@ function getNearestQuotes(quotesMap, dateObject) {
                 nearestMinute: dateObject.getMinutes() - i,
                 matches: possibleMatches
             };
-            break;
         }
     }
-
-    return null;
 }
 
 function getRandomElement(list) {
@@ -51,8 +51,8 @@ function getRandomElement(list) {
 function currentDate(quotesMap) {
     const date = new Date();
 
-    nearestQuotes = getNearestQuotes(quotesMap, date);
-    theQuote = getRandomElement(nearestQuotes.matches);
+    const nearestQuotes = getNearestQuotes(quotesMap, date);
+    const theQuote = getRandomElement(nearestQuotes.matches);
 
     setContent('time', readableTime(nearestQuotes.nearestHour, nearestQuotes.nearestMinute));
     setContent('quote', theQuote.quote);
@@ -68,11 +68,11 @@ function currentDate(quotesMap) {
 
 window.onload = () => {
     fetch('/quotes.json')
-        .then(r => {
-            return r.text()
-        })
-        .then(t => {
-            document.getElementById('loading').style.display = 'none';
-            currentDate(JSON.parse(t))
-        });
+    .then(response => {
+        return response.text()
+    })
+    .then(text => {
+        document.getElementById('loading').style.display = 'none';
+        currentDate(JSON.parse(text));
+    });
 }
