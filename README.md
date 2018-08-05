@@ -17,7 +17,7 @@ TODO
 ----
 
 * [ ] Split the JSON up into smaller files (?)
-* [ ] Mobile
+* [x] Mobile
 * [ ] Fade in and out
 * [x] Loading
 * [x] Error
