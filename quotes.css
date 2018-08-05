@@ -61,11 +61,21 @@ noscript {
 }
 
 #time {
-    color: #f30;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     font-family: "IBM Plex Sans Condensed";
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1.5em;
+}
+
+#quote-time {
+    color: #f30;
+}
+
+#real-time {
+    color: #f9f9f9;
+    text-align: right;
 }
 
 #quote {

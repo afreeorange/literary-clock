@@ -77,7 +77,7 @@ function getQuote(quotesMap) {
 }
 
 function setContent(quote) {
-    document.getElementById('time').innerHTML = readableTime(
+    document.getElementById('quote-time').innerHTML = readableTime(
         quote.nearestHour,
         quote.nearestMinute,
     );
@@ -100,6 +100,17 @@ function sleepFor(milliseconds) {
 
 function setQuote(quotesMap) {
     let theQuote = getQuote(quotesMap);
+    let timeNow = new Date();
+
+    if (timeNow.getMinutes() !== theQuote.nearestMinute) {
+        document.getElementById('real-time').innerHTML = readableTime(
+            timeNow.getHours(),
+            timeNow.getMinutes(),
+        );
+    } else {
+        document.getElementById('real-time').innerHTML = '';
+    }
+
     return setContent(theQuote);
 
     // // The very first time this is called
