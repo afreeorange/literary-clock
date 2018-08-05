@@ -1,18 +1,26 @@
 #!/bin/bash
 
-FILES_TO_SYNC="
-clock.css
-clock.html
-clock.js
-deploy
-loading.svg
-quotes.json
-"
+S3_PREFIX="public.nikhil.io/quotes"
+S3_PREFIX_ESCAPED=$(echo $S3_PREFIX | sed 's/\//\\\//g')
 
+rm -rf tmp
 mkdir -p tmp
-for FILE in $FILES_TO_SYNC; do
+
+sed "s/\/quotes/http:\/\/"$S3_PREFIX_ESCAPED"\/quotes/" quotes.html > tmp/index.html
+sed "s/\/quotes/http:\/\/"$S3_PREFIX_ESCAPED"\/quotes/" quotes.js > tmp/quotes.js
+sed "s/\/loading/http:\/\/"$S3_PREFIX_ESCAPED"\/loading/" quotes.css > tmp/quotes.css
+cp quotes.json loading.svg tmp/
+
+cd tmp
+for FILE in *; do
     gzip -9 $FILE
-    mv $FILE.gz tmp/$FILE
+    mv $FILE.gz $FILE
 done
 
-# aws s3 sync tmp/ s3://public.nikhil.io/quotes/ --content-encoding gzip
+aws s3 sync . "s3://"$S3_PREFIX/ \
+    --delete \
+    --profile nikhil.io \
+    --content-encoding gzip
+
+cd ..
+rm -rf tmp
