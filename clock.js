@@ -1,5 +1,5 @@
 function setContent(element, content) {
-    document.getElementById(element).innerText = content;
+    document.getElementById(element).innerHTML = content;
 }
 
 // Lol.
@@ -23,7 +23,7 @@ function readableTime(hours, minutes) {
 }
 
 function makeMapKey(hours, minutes) {
-    return leftPadWithZero(hours) + ':' + leftPadWithZero(minutes) + ':00h';
+    return leftPadWithZero(hours) + ':' + leftPadWithZero(minutes);
 }
 
 function getNearestQuotes(quotesMap, dateObject) {
@@ -55,9 +55,17 @@ function currentDate(quotesMap) {
     const theQuote = getRandomElement(nearestQuotes.matches);
 
     setContent('time', readableTime(nearestQuotes.nearestHour, nearestQuotes.nearestMinute));
-    setContent('quote', theQuote.quote);
+    setContent(
+        'quote',
+        theQuote.quote.replace(
+            theQuote.timeFragment,
+            '<strong>' + theQuote.timeFragment + '</strong>'
+        )
+    );
     setContent('book', theQuote.book);
     setContent('author', theQuote.author);
+
+    console.log(theQuote.timeFragment);
 
     setTimeout(
         currentDate,

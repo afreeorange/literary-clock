@@ -24,7 +24,7 @@ for row in table_of_quotes.findAll('tr'):
     quote_data = [_.text.strip() for _ in cells]
 
     if quote_data and all(quote_data):
-        quotes[quote_data[0]].append({
+        quotes[quote_data[0].replace(':00h', '')].append({
             'quote': quote_data[1],
             'book': quote_data[2],
             'author': quote_data[3],

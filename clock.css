@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=EB+Garamond:400,400i|IBM+Plex+Sans+Condensed:600');
+@import url('https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,600|IBM+Plex+Sans+Condensed:600');
 
 /* http://meyerweb.com/eric/tools/css/reset/
    v4.0 | 20180602
@@ -14,11 +14,11 @@ html, body {
 body {
     background: #fff;
     color: #111;
+    display: table;
     font-family: "EB Garamond";
     font-size: 12px;
     height: 100%;
     width: 100%;
-    display: table;
 }
 
 #loading {
@@ -44,10 +44,10 @@ body {
 }
 
 #time {
-    font-family: "IBM Plex Sans Condensed";
-    font-weight: bold;
-    font-size: 1.75rem;
     color: #f30;
+    font-family: "IBM Plex Sans Condensed";
+    font-size: 1.5rem;
+    font-weight: bold;
     margin-bottom: 1.5em;
 }
 
@@ -56,9 +56,13 @@ body {
     line-height: 1.25;
 }
 
+#quote strong {
+    font-weight: 600;
+}
+
 #source {
+    font-size: 1.5rem;
     margin-top: 1.5em;
-    font-size: 1.75rem;
     text-align: right;
 }
 
