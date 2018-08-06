@@ -76,17 +76,21 @@ function getQuote(quotesMap) {
     return theQuote;
 }
 
-function setContent(quote) {
-    document.getElementById('quote-time').innerHTML = readableTime(
-        quote.nearestHour,
-        quote.nearestMinute,
+function setContent(quoteObject) {
+    let hour = quoteObject.nearestHour;
+    let minute = quoteObject.nearestMinute;
+    let timeFragment = smarten(quoteObject.timeFragment);
+    let book = smarten(quoteObject.book);
+    let author = smarten(quoteObject.author);
+    let quote = smarten(quoteObject.quote).replace(
+        timeFragment,
+        '<strong>' + timeFragment + '</strong>',
     );
-    document.getElementById('quote').innerHTML = smarten(quote.quote).replace(
-        quote.timeFragment,
-        '<strong>' + quote.timeFragment + '</strong>',
-    );
-    document.getElementById('book').innerHTML = smarten(quote.book);
-    document.getElementById('author').innerHTML = smarten(quote.author);
+
+    document.getElementById('time').innerHTML = readableTime(hour, minute);
+    document.getElementById('book').innerHTML = book;
+    document.getElementById('author').innerHTML = author;
+    document.getElementById('quote').innerHTML = quote;
 }
 
 function sleepFor(milliseconds) {
@@ -102,10 +106,11 @@ function setQuote(quotesMap) {
     let theQuote = getQuote(quotesMap);
     let timeNow = new Date();
 
-    document.getElementById('real-time').innerHTML = readableTime(
-        timeNow.getHours(),
-        timeNow.getMinutes(),
-    );
+    if (timeNow.getMinutes() !== theQuote.nearestMinute) {
+        document.getElementById('time').classList.add('approximate-time');
+    } else {
+        document.getElementById('time').classList.remove('approximate-time');
+    }
 
     return setContent(theQuote);
 
@@ -133,7 +138,7 @@ function setQuote(quotesMap) {
     // }
 }
 
-window.onload = () => {
+window.onload = function() {
     fetch('/quotes.json')
     .then(response => {
         if (response.status != 200) {

@@ -19,9 +19,10 @@ TODO
 * [ ] Split the JSON up into smaller files (?)
 * [x] Mobile
 * [ ] Fade in and out
+* [ ] Read [this](https://johnresig.com/blog/how-javascript-timers-work/) and [this](http://www.geekabyte.io/2014/01/javascript-effect-of-setting-settimeout.html)
 * [x] Loading
 * [x] Error
-* [ ] Complete typographic corrections
+* [ ] Complete typographic corrections in source CSV
 
 License
 -------
