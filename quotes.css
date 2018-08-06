@@ -70,12 +70,11 @@ noscript {
 }
 
 #quote-time {
-    color: #f30;
+    visibility: hidden;
 }
 
 #real-time {
-    color: #f9f9f9;
-    text-align: right;
+    color: #eee;
 }
 
 #quote {
@@ -86,6 +85,7 @@ noscript {
 
 #quote strong {
     font-weight: 600;
+    color: #ff3300;
 }
 
 #source {
@@ -103,6 +103,7 @@ noscript {
 @media (min-width: 350px) and (max-width: 600px) {
     #time {
         margin-bottom: 1em;
+        font-size: 1.25rem;
     }
     #quote {
         font-size: 4vh;

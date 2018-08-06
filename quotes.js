@@ -102,14 +102,10 @@ function setQuote(quotesMap) {
     let theQuote = getQuote(quotesMap);
     let timeNow = new Date();
 
-    if (timeNow.getMinutes() !== theQuote.nearestMinute) {
-        document.getElementById('real-time').innerHTML = readableTime(
-            timeNow.getHours(),
-            timeNow.getMinutes(),
-        );
-    } else {
-        document.getElementById('real-time').innerHTML = '';
-    }
+    document.getElementById('real-time').innerHTML = readableTime(
+        timeNow.getHours(),
+        timeNow.getMinutes(),
+    );
 
     return setContent(theQuote);
 
