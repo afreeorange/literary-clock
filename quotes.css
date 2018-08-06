@@ -73,7 +73,7 @@ noscript {
 }
 
 #quote {
-    font-size: 5vh;
+    font-size: 5vw;
     line-height: 1.25;
 }
 
@@ -83,7 +83,7 @@ noscript {
 }
 
 #source {
-    font-size: 3.25vh;
+    font-size: 3.125vw;
     line-height: 1.25;
     margin-top: 1.5em;
     text-align: right;
@@ -100,7 +100,7 @@ noscript {
         font-size: 1.25rem;
     }
     #quote {
-        font-size: 4vh;
+        font-size: 2.25rem;
     }
     #source {
         margin-top: 1em;
