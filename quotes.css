@@ -61,7 +61,7 @@ noscript {
 }
 
 #time {
-    color: #eee;
+    color: #ddd;
     font-family: "IBM Plex Sans Condensed";
     font-size: 1.5rem;
     font-weight: bold;
@@ -69,7 +69,7 @@ noscript {
 }
 
 .approximate-time::before {
-    content: "≈ ";
+    content: "about ";
 }
 
 #quote {
