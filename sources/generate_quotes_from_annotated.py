@@ -15,6 +15,6 @@ with open('litclock_annotated.csv') as csv_file:
         })
         counter += 1
 
-print(json.dumps(quotes, indent=4))
+print(json.dumps(quotes, indent=2))
 
 # print(counter)

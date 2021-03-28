@@ -30,4 +30,4 @@ for row in table_of_quotes.findAll('tr'):
             'author': quote_data[3],
         })
 
-print(json.dumps(quotes, indent=4))
+print(json.dumps(quotes, indent=2))
