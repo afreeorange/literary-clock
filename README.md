@@ -1,6 +1,6 @@
 # A 24-Hour Literary Clock
 
-Shows a with a quote for (almost) every minute of the day. Inspired by [this](https://www.instructables.com/id/Literary-Clock-Made-From-E-reader/).
+Shows a with a quote for (almost) every minute of the day. Inspired by [this](https://www.instructables.com/id/Literary-Clock-Made-From-E-reader/). [See it in action here](https://public.nikhil.io/literary-clock/index.html).
 
 ## Sources
 
