@@ -13,13 +13,15 @@ Some cleanup and hand-editing was necessary for ~150 annotations. Python's `fuzz
 
 ## TODO
 
-* [ ] Split the JSON up into smaller files (?)
 * [x] Mobile
+* [ ] Split the JSON up into smaller files (?)
 * [ ] Fade in and out
 * [ ] Read [this](https://johnresig.com/blog/how-javascript-timers-work/) and [this](http://www.geekabyte.io/2014/01/javascript-effect-of-setting-settimeout.html)
-* [x] Loading
-* [x] Error
+* [ ] Loading
+* [ ] Error
 * [ ] Complete typographic corrections in source CSV
+* [ ] Prevent unnecessary rerenders
+* [ ] Dark and Light modes
 
 ## License
 
