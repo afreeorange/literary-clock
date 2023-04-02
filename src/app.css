@@ -25,7 +25,7 @@ p {
 :root {
   --color-background: #101010;
   --color-text: #fff;
-  --color-text-light: #666;
+  --color-text-light: #535252;
   --color-text-lighter: #999;
   --color-highlight: red;
 }
@@ -56,7 +56,7 @@ strong {
 header {
   color: var(--color-text-light);
   font-family: "IBM Plex Sans Condensed";
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1.5em;
 }

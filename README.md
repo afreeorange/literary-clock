@@ -2,6 +2,21 @@
 
 Shows a with a quote for (almost) every minute of the day. Inspired by [this](https://www.instructables.com/id/Literary-Clock-Made-From-E-reader/). [See it in action here](https://public.nikhil.io/literary-clock/index.html).
 
+## Development
+
+Bootstrapped with Vite (Preact + TypeScript).
+
+```bash
+# Start server
+yarn dev
+
+# Build
+yarn build
+
+# Build with base URL
+yarn build --base=/some-base
+```
+
 ## Sources
 
 * Jaap Meijers' [annotated CSV](https://www.instructables.com/id/Literary-Clock-Made-From-E-reader/)
@@ -22,6 +37,9 @@ Some cleanup and hand-editing was necessary for ~150 annotations. Python's `fuzz
 * [ ] Complete typographic corrections in source CSV
 * [ ] Prevent unnecessary rerenders
 * [ ] Dark and Light modes
+* [ ] Change typefaces
+* [ ] Resize to fit viewport height
+* [ ] Remove unnecessary quotes in source
 
 ## License
 

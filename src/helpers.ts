@@ -1,10 +1,24 @@
 import quotes, { Quote } from "./quotes";
 
-export const randomQuote = (s: Quote[]): Quote =>
-	s[Math.floor(Math.random() * s.length)];
+const readableTime = (d: Date) => {
+	const hours = d.getHours();
+	const minutes = d.getMinutes();
+
+	if (hours === 0) {
+		return `00:${minutes.toString().padStart(2, "0")} AM`;
+	}
+
+	if (hours >= 12) {
+		return `${hours - 12}:${minutes.toString().padStart(2, "0")} PM`;
+	}
+
+	return `${hours}:${minutes.toString().padStart(2, "0")} AM"`;
+};
+
+const randomQuote = (qs: Quote[]) => qs[Math.floor(Math.random() * qs.length)];
 
 // https://github.com/kellym/smartquotes.js
-export const smarten = (s: string) =>
+const smarten = (s: string) =>
 	s
 		// triple prime
 		.replace(/'''/g, "\u2034")
@@ -55,10 +69,9 @@ export const getQuote = (d: Date): Quote => {
 		...q,
 		author: smarten(q.author),
 		book: smarten(q.book),
-		quote: smarten(q.quote).replace(
-			q.timeFragment,
-			`<strong>${q.timeFragment}</strong>`,
+		quote: smarten(
+			q.quote.replaceAll(q.timeFragment, `<strong>${q.timeFragment}</strong>`),
 		),
-		timeFragment: smarten(q.timeFragment),
+		timeFragment: readableTime(d),
 	};
 };
