@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <meta
       name="viewport"
       content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"
@@ -18,23 +19,14 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://public.nikhil.io/literary-clock" />
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Literary Clock</title>
-    <link rel="stylesheet" href="/quotes.css" />
   </head>
   <body>
     <noscript>
       <p>This sadly requires Javascript to be enabled on your browser 😕</p>
     </noscript>
-    <div id="loading"></div>
-    <div id="oh-crap">Something went wrong&hellip; sorry.</div>
-    <div id="wrapper">
-      <div id="time"></div>
-      <div id="quote"></div>
-      <div id="source">
-        &mdash; <span id="author"></span><span id="comma">, </span
-        ><span id="book"></span>
-      </div>
-    </div>
+    <div id="app"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
-  <script type="text/javascript" src="/quotes.js"></script>
 </html>
