@@ -12,7 +12,7 @@ const readableTime = (d: Date) => {
 		return `${hours - 12}:${minutes.toString().padStart(2, "0")} PM`;
 	}
 
-	return `${hours}:${minutes.toString().padStart(2, "0")} AM"`;
+	return `${hours}:${minutes.toString().padStart(2, "0")} AM`;
 };
 
 const randomQuote = (qs: Quote[]) => qs[Math.floor(Math.random() * qs.length)];
