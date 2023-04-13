@@ -1,6 +1,6 @@
 import { useState, useEffect } from "preact/hooks";
 
-import { Quote } from "./quotes";
+import { Quote, developmentQuotes } from "./quotes";
 import { getQuote } from "./helpers";
 import "./app.css";
 
@@ -15,6 +15,9 @@ export function App() {
 
   useEffect(() => {
     setQuote(getQuote(time));
+
+    // NOTE: Uncomment during development ✨
+    // setQuote(developmentQuotes[0]);
   }, [time]);
 
   useEffect(() => {

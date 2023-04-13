@@ -5,17 +5,21 @@
 *::after {
   box-sizing: border-box;
 }
+
 * {
   margin: 0;
 }
+
 html,
 body {
   height: 100%;
 }
+
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
+
 p {
   overflow-wrap: break-word;
 }
@@ -28,6 +32,7 @@ p {
   --color-text-light: #535252;
   --color-text-lighter: #999;
   --color-highlight: red;
+  --root-spacing: 1.5rem;
 }
 
 html,
@@ -46,7 +51,7 @@ noscript {
 }
 
 #app {
-  padding: 4em;
+  padding: calc(var(--root-spacing) * 3);
 }
 
 strong {
@@ -58,10 +63,10 @@ header {
   font-family: "IBM Plex Sans Condensed";
   font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 1.5em;
+  margin-bottom: var(--root-spacing);
 }
 
-main > p {
+main>p {
   font-size: 5vw;
   line-height: 1.25;
 }
@@ -69,7 +74,7 @@ main > p {
 footer {
   font-size: 3.25vw;
   line-height: 1.25;
-  margin-top: 1.5em;
+  margin-top: var(--root-spacing);
   text-align: right;
   color: var(--color-text-lighter);
 }
@@ -83,9 +88,11 @@ footer {
     margin-bottom: 1em;
     font-size: 1.25rem;
   }
-  main > p {
+
+  main>p {
     font-size: 2.25rem;
   }
+
   footer {
     margin-top: 1em;
     font-size: 1.3rem;
